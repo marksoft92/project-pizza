@@ -62,7 +62,7 @@
       thisProduct.getElements();
       thisProduct.initAccorion();
       thisProduct.initOrderForm();
-
+      thisProduct.initAmountWidget()
       thisProduct.processOrder();
       
     }
@@ -86,6 +86,7 @@
       thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
       thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
+      thisProduct.amountWidgetElem = thisProduct.element.querySelector(select.menuProduct.amountWidget);
     }
 
     initAccorion(){
@@ -147,9 +148,15 @@
         event.preventDefault();
         thisProduct.processOrder();
       });
+      
      
     
     }
+    initAmountWidget(){
+      const thisProduct=this;
+      thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
+    }
+
     processOrder(){
       const thisProduct = this;
 
@@ -206,15 +213,68 @@
        
         /* END LOOP: for each paramId in thisProduct.data.params */ 
       }
+     const priceElem = price;
      
-   thisProduct.priceElem===price;
-   console.log(thisProduct);
+   console.log(priceElem);
   
     }
   
   }
+  
+
+class AmountWidget{
+  constructor(element){
+const thisWidget = this;
+
+thisWidget.getElements(element);
+thisWidget.setValue(thisWidget.input.value);
+
+console.log('xxxxxxxxxxxx',thisWidget);
+console.log('xxxxxxxxxxxx',element);
+  
 
 
+}
+
+
+
+getElements(element){
+  const thisWidget = this;
+
+  thisWidget.element = element;
+  thisWidget.input = thisWidget.element.querySelector(select.widgets.amount.input);
+  thisWidget.linkDecrease = thisWidget.element.querySelector(select.widgets.amount.linkDecrease);
+  thisWidget.linkIncrease = thisWidget.element.querySelector(select.widgets.amount.linkIncrease);
+}
+setValue(value){
+  const thisWidget=this;
+const newValue = parseInt(value);
+
+
+thisWidget.value = newValue;
+thisWidget.input.value = thisWidget.value;
+}
+
+initActions(){
+thisWidget.input.addEventListener('change',function(){
+  thisWidget.setValue(thisWidget.input.value);
+});
+thisWidget.linkDecrease.addEventListener('click',function(event){
+  event.preventDefault();
+  thisProduct.setValue(thisWidget.value-1);
+});
+thisWidget.linkDecrease.addEventListener('click',function(event){
+  event.preventDefault();
+  thisProduct.setValue(thisWidget.value+1);
+});
+
+
+}
+
+}
+
+
+ 
   const app = {
     
     initMenu: function(){
