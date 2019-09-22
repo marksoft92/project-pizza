@@ -26,7 +26,7 @@
     },
     widgets: {
       amount: {
-        input: 'input[name="amount"]',
+        input: 'input.amount',
         linkDecrease: 'a[href="#less"]',
         linkIncrease: 'a[href="#more"]',
       },
@@ -232,7 +232,7 @@
       const thisWidget = this;
 
       thisWidget.getElements(element);
-      thisWidget.value = settings.amountWidget.defaultValue;
+      thisWidget.input.value = settings.amountWidget.defaultValue;
       thisWidget.setValue(thisWidget.input.value);
       thisWidget.initActions();
       thisWidget.announce();
@@ -272,11 +272,9 @@
     initActions(){
       const thisWidget = this;
 
-      thisWidget.input.addEventListener('change', function() {thisWidget.value = thisWidget.input.value;});
-      thisWidget.linkDecrease.addEventListener('click', function() {thisWidget.value = thisWidget.input.value - 1;});
-      thisWidget.linkIncrease.addEventListener('click', function() {
-        const inputValue = parseInt(thisWidget.input.value);
-        thisWidget.value = inputValue + 1; });
+      thisWidget.input.addEventListener('change', function() {thisWidget.setValue = thisWidget.input.value;});
+      thisWidget.linkDecrease.addEventListener('click', function() {thisWidget.setValue = thisWidget.input.value - 1;});
+      thisWidget.linkIncrease.addEventListener('click', function() {thisWidget.setValue = inputValue + 1; });
     }
 
     
