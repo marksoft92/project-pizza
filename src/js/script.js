@@ -212,14 +212,13 @@
             image.classList.remove('active');
           /* END LOOP: for each optionId in param.options */
           }}/* multiplay price by amount */
-        thisProduct.priceSingle = price;
-        thisProduct.price = thisProduct.priceSingle * thisProduct.amountWidget.value;
-        /* set the contents of thisProduct.priceElem to be the value of variable price */
-        thisProduct.priceElem.innerHTML = thisProduct.price;
+        
         //console.log(thisProduct.priceElem);
       }
      
-     
+      thisProduct.price =price* thisProduct.amountWidget.input.value;
+      /* set the contents of thisProduct.priceElem to be the value of variable price */
+      thisProduct.priceElem.innerHTML = thisProduct.price;
      
   
     }
@@ -232,13 +231,14 @@
       const thisWidget = this;
 
       thisWidget.getElements(element);
+      thisWidget.initActions();
       thisWidget.input.value = settings.amountWidget.defaultValue;
       thisWidget.setValue(thisWidget.input.value);
-      thisWidget.initActions();
+      
       thisWidget.announce();
 
-      console.log('xxxxxxxxxxxx',thisWidget);
-      console.log('xxxxxxxxxxxx',element);
+      
+     
   
 
 
@@ -258,14 +258,14 @@
     setValue(value){
       const thisWidget=this;
       const newValue = parseInt(value);
-      
+      console.log('xxxxxxxxxxxx',newValue);
 
       if(newValue != thisWidget.value && newValue >= settings.amountWidget.defaultMin && newValue <= settings.amountWidget.defaultMax){
         thisWidget.input.value = value;
         thisWidget.announce();
       }
     }
-    getvalue(){
+    get value(){
       return this.input.value;
     }
 
@@ -274,7 +274,8 @@
 
       thisWidget.input.addEventListener('change',function() {  thisWidget.setValue (thisWidget.input.value); });
       thisWidget.linkDecrease.addEventListener('click',  function() { thisWidget.setValue  (thisWidget.input.value - 1); });
-      thisWidget.linkIncrease.addEventListener('click',  function() { thisWidget.setValue  (thisWidget.input.value + 1); });
+      thisWidget.linkIncrease.addEventListener('click',  function() { const value = parseInt(thisWidget.input.value);
+        thisWidget.setValue(value + 1);});
     }
 
     
