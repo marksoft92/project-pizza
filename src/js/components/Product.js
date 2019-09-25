@@ -44,7 +44,7 @@ export class Product {
     const thisProduct = this;
 
     /* find the clickable trigger (the element that should react to clicking) */
-    const accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
+    //const accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
     //console.log(trigger);
     /* START: click event listener to trigger */
     thisProduct.accordionTrigger.addEventListener('click', function(){

@@ -111,19 +111,19 @@ export class Cart {
     }
 
     const options = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(payload)
-    };
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      };
   
-    fetch(url, options)
-      .then(function(response) {
-        return response.json();
-      })
-      .then(function(parsedResponse) {
-        console.log('parsedResponse', parsedResponse);
-      });
-  }
+      fetch(url, options)
+        .then(function(response) {
+          return response.json();
+        })
+        .then(function(parsedResponse) {
+          console.log('parsedResponse', parsedResponse);
+        });
+    }
 }
