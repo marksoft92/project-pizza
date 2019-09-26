@@ -1,57 +1,55 @@
 import { settings, select } from '../settings.js';
+import {BaseWidget} from './BaseWidget.js';
 
 
 
-export class AmountWidget {
-  constructor(element, value = settings.amountWidget.defaultValue) {
-    const thisWidget = this;
-    thisWidget.getElements(element);
-    thisWidget.value = value;
-    thisWidget.initActions();
-    thisWidget.announce();
 
+export class AmountWidget extends BaseWidget {
+    constructor(element) {
+        super(element, settings.amountWidget.defaultValue);
     
-  }
-
-  getElements(element){
-    const thisWidget = this;
-
-    thisWidget.element = element;
-    thisWidget.input = thisWidget.element.querySelector(select.widgets.amount.input);
-    thisWidget.linkDecrease = thisWidget.element.querySelector(select.widgets.amount.linkDecrease);
-    thisWidget.linkIncrease = thisWidget.element.querySelector(select.widgets.amount.linkIncrease);
-  }
-
-   
-
-  set value(value){
-    const thisWidget = this;
-    const newValue = parseInt(value);
-
-    if(newValue != thisWidget.value && newValue >= settings.amountWidget.defaultMin && newValue <= settings.amountWidget.defaultMax){
-      thisWidget.input.value = value;
-      thisWidget.announce();
+        const thisWidget = this;
+    
+        thisWidget.getElements(element);
+    
+        thisWidget.initActions();
+    
+    
+      }
+    
+      getElements() {
+        const thisWidget = this;
+    
+        thisWidget.dom.input = thisWidget.dom.wrapper.querySelector(select.widgets.amount.input);
+        thisWidget.dom.linkDecrease = thisWidget.dom.wrapper.querySelector(select.widgets.amount.linkDecrease);
+        thisWidget.dom.linkIncrease = thisWidget.dom.wrapper.querySelector(select.widgets.amount.linkIncrease);
+      }
+    
+      isValid(value) {
+        return !isNaN(value) && value >= settings.amountWidget.defaultMin && value <= settings.amountWidget.defaultMax;
+      }
+    
+      renderValue() {
+        const thisWidget = this;
+    
+        thisWidget.dom.input.value = thisWidget.value;
+      }
+    
+      initActions() {
+        const thisWidget = this;
+    
+        thisWidget.dom.input.addEventListener('change', function() {
+       
+          thisWidget.value = thisWidget.dom.input.value;
+        });
+        thisWidget.dom.linkDecrease.addEventListener('click', function(event) {
+          event.preventDefault();
+          thisWidget.setValue(thisWidget.value - 1);
+        });
+        thisWidget.dom.linkIncrease.addEventListener('click', function(event) {
+          event.preventDefault();
+          thisWidget.setValue(thisWidget.value + 1);
+        });
+      }
     }
-  }
-  get value(){
-    return this.input.value;
-  }
-
-  initActions(){
-    const thisWidget = this;
-
-    thisWidget.input.addEventListener('change', function() {thisWidget.value = thisWidget.input.value;});
-    thisWidget.linkDecrease.addEventListener('click', function() {thisWidget.value = thisWidget.input.value - 1;});
-    thisWidget.linkIncrease.addEventListener('click', function() {
-      const inputValue = parseInt(thisWidget.input.value);
-      thisWidget.value = inputValue + 1; });
-  }
-  announce(){
-    const thisWidget = this;
-
-    const event = new CustomEvent('updated', {
-      bubbles: true
-    });
-    thisWidget.element.dispatchEvent(event);
-  }
-}
+    
