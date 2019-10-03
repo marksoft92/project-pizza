@@ -1,5 +1,5 @@
 .product-list {
-  padding: ($base-size * 3) 0;
+  margin: ($base-size * 3.5) auto;
 }
 
 .product {
@@ -12,14 +12,12 @@
   &__header {
     @include flex(row, center, space-between);
     margin-bottom: ($base-size * 2);
-   
     cursor: pointer;
   }
 
   &__name {
     @extend .h1;
     position: relative;
-   
   }
 
   &__icon {
@@ -32,8 +30,8 @@
   }
 
   &__base-price {
+    @extend .h1;
     font-weight: $font-light;
-    @extend .h2;
   }
 
   &__description {
@@ -90,9 +88,7 @@
       &.active {
         opacity: 1;
       }
-
     }
-
   }
 
   &.active {
@@ -100,16 +96,15 @@
       @include accordion-open();
     }
 
-    .product__order, .product__images {
+    .product__order,
+    .product__images {
       opacity: 1;
     }
 
     .product__icon {
       transform: rotate(180deg);
     }
-
   }
-
 }
 
 .widget-amount {
@@ -120,5 +115,4 @@
     margin: 0 ($base-size / 2);
     padding: 0;
   }
-
 }

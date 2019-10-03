@@ -1,22 +1,21 @@
-
-
+/* global Handlebars */
 
 export const select = {
   templateOf: {
     menuProduct: '#template-menu-product',
     cartProduct: '#template-cart-product',
-    bookingWidget: '#template-booking-widget',
+    bookingWidget: '#template-booking-widget'
   },
   containerOf: {
     menu: '#product-list',
     cart: '#cart',
     pages: '#pages',
-    booking: '.booking-wrapper',
+    booking: '.booking-wrapper'
   },
   all: {
     menuProducts: '#product-list > .product',
     menuProductsActive: '#product-list > .product.active',
-    formInputs: 'input, select',
+    formInputs: 'input, select'
   },
   menuProduct: {
     clickable: '.product__header',
@@ -24,23 +23,23 @@ export const select = {
     priceElem: '.product__total-price .price',
     imageWrapper: '.product__images',
     amountWidget: '.widget-amount',
-    cartButton: '[href="#add-to-cart"]',
+    cartButton: '[href="#add-to-cart"]'
   },
   widgets: {
     amount: {
       input: 'input.amount',
       linkDecrease: 'a[href="#less"]',
-      linkIncrease: 'a[href="#more"]',
+      linkIncrease: 'a[href="#more"]'
     },
     datePicker: {
       wrapper: '.date-picker',
-      input: `input[name="date"]`,
+      input: `input[name="date"]`
     },
     hourPicker: {
       wrapper: '.hour-picker',
       input: 'input[type="range"]',
-      output: '.output',
-    },
+      output: '.output'
+    }
   },
   cart: {
     productList: '.cart__order-summary',
@@ -52,64 +51,72 @@ export const select = {
     form: '.cart__order',
     formSubmit: '.cart__order [type="submit"]',
     phone: '[name="phone"]',
-    address: '[name="address"]',
+    address: '[name="address"]'
   },
   cartProduct: {
     amountWidget: '.widget-amount',
     price: '.cart__product-price',
     edit: '[href="#edit"]',
-    remove: '[href="#remove"]',
+    remove: '[href="#remove"]'
   },
   booking: {
     peopleAmount: '.people-amount',
     hoursAmount: '.hours-amount',
     tables: '.floor-plan .table',
+    tablesSelected: '.floor-plan .table.selected',
+    form: '.booking-form',
+    formSubmit: '.booking-form [type="submit"]',
+    phone: '[name="phone"]',
+    address: '[name="address"]',
+    starters: '.checkbox [type="checkbox"]'
   },
   nav: {
-    links: '.main-nav a',
-  },
+    links: '.main-nav a'
+  }
 };
 
 export const classNames = {
   menuProduct: {
     wrapperActive: 'active',
-    imageVisible: 'active',
+    imageVisible: 'active'
   },
   cart: {
-    wrapperActive: 'active',
+    wrapperActive: 'active'
   },
   booking: {
     loading: 'loading',
     tableBooked: 'booked',
+    tableSelected: 'selected'
   },
   nav: {
-    active: 'active',
+    active: 'active'
   },
   pages: {
-    active: 'active',
-  },
+    active: 'active'
+  }
 };
 
 export const settings = {
   hours: {
     open: 12,
-    close: 24,
+    close: 24
   },
   amountWidget: {
     defaultValue: 1,
     defaultMin: 1,
-    defaultMax: 9,
+    defaultMax: 9
   },
   datePicker: {
-    maxDaysInFuture: 14,
+    maxDaysInFuture: 14
   },
   cart: {
-    defaultDeliveryFee: 20,
-  }, booking: {
-    tableIdAttribute: 'data-table',
+    defaultDeliveryFee: 20
+  },
+  booking: {
+    tableIdAttribute: 'data-table'
   },
   db: {
-    url: '//localhost:3131',
+    url: '//' + window.location.hostname + (window.location.hostname == 'localhost' ? ':3131' : ''),
     product: 'product',
     order: 'order',
     booking: 'booking',
@@ -117,12 +124,12 @@ export const settings = {
     dateStartParamKey: 'date_gte',
     dateEndParamKey: 'date_lte',
     notRepeatParam: 'repeat=false',
-    repeatParam: 'repeat_ne=false',
-  },
+    repeatParam: 'repeat_ne=false'
+  }
 };
 
 export const templates = {
   menuProduct: Handlebars.compile(document.querySelector(select.templateOf.menuProduct).innerHTML),
   cartProduct: Handlebars.compile(document.querySelector(select.templateOf.cartProduct).innerHTML),
-  bookingWidget: Handlebars.compile(document.querySelector(select.templateOf.bookingWidget).innerHTML),
+  bookingWidget: Handlebars.compile(document.querySelector(select.templateOf.bookingWidget).innerHTML)
 };
